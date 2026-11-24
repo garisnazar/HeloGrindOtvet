@@ -77,16 +77,7 @@ const START_TEXT =
   "✅ Проверено тысячами выпускников\n\n" +
   "👇 <b>Выберите, что вам нужно:</b>";
 
-function isAllowed(env, userId) {
-  const raw = (env.ALLOWED_USERS || "").trim();
-  if (!raw) return true;
-  return raw.split(",").map(s => s.trim()).includes(String(userId));
-}
-
 async function onStart(env, msg) {
-  if (!isAllowed(env, msg.from.id)) {
-    return sendMessage(env, msg.chat.id, "⛔ Доступ закрыт.");
-  }
   return sendMessage(env, msg.chat.id, START_TEXT, startKeyboard(env));
 }
 
